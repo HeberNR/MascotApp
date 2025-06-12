@@ -128,8 +128,15 @@ public abstract class Mascota implements Loggable {
    * Imprime los detalles de la mascota en el log.
    */
   public void mostrarFicha() {
-    log().info("Nombre: " + nombre + ", Edad: " + edad + ", Paciente: "
-        + id + ", Raza: " + raza + ", Comportamiento: " + comportamiento);
+    String ficha = "\n---- FICHA DE MASCOTA ----\n"
+        + "Nombre: " + nombre + "\n"
+        + "Edad: " + edad + " años\n"
+        + "ID: " + id + "\n"
+        + "Raza: " + raza + "\n"
+        + "Comportamiento: " + comportamiento + "\n"
+        + "Tamaño: " + tamanio + " cm\n"
+        + "Peso: " + peso + " kg\n";
+    log().info(ficha);
   }
 
   /**
@@ -139,4 +146,8 @@ public abstract class Mascota implements Loggable {
    * @return Tipo de mascota como String.
    */
   public abstract String tipoMascota();
+
+  public String getDescripcionId() {
+    return "ID de " + this.getNombre() + ": " + this.getid();
+  }
 }

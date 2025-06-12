@@ -1,7 +1,7 @@
 package mascotapp.model;
 
+import java.util.logging.Level;
 import mascotapp.util.Loggable;
-
 
 /**
  * Clase Turno que representa un dueño de mascotas.
@@ -19,9 +19,8 @@ public class Duenio implements Loggable {
   /**
    * Constructor de la clase Duenio.
    *
-   * @param nombre   Nombre del dueño.
-   * @param telefono Teléfono del dueño.
-   * @param mascotas Array de mascotas del dueño, con un máximo de 4.
+   * @param nombre   nombre del dueño
+   * @param telefono teléfono del dueño
    */
   public Duenio(String nombre, String telefono) {
     this.id = contadorDuenios++;
@@ -100,17 +99,21 @@ public class Duenio implements Loggable {
    * Recorre el array de mascotas y muestra la ficha de cada una.
    */
   public void mostrarMascotas() {
-    log().info("Mascotas de " + nombre + ":");
-    if (cantidadMascotas == 0) {
-      log().info("  - No tiene mascotas registradas.");
-    } else {
-      for (int i = 0; i < cantidadMascotas; i++) {
-        Mascota m = mascotas[i];
-        if (m != null) {
-          log().info("  - " + m.getNombre() + " (" + m.getClass().getSimpleName() + ")");
+    if (log().isLoggable(Level.INFO)) {
+      log().info("Mascotas de " + nombre);
+
+      if (cantidadMascotas == 0) {
+        log().info("  - No tiene mascotas registradas.");
+      } else {
+        for (int i = 0; i < cantidadMascotas; i++) {
+          Mascota m = mascotas[i];
+          if (m != null) {
+            log().info(String.format("  - %s (%s)", m.getNombre(), m.getClass().getSimpleName()));
+          }
         }
       }
     }
   }
+
 }
 

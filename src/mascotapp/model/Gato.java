@@ -8,6 +8,7 @@ import mascotapp.util.Loggable;
  * edad, raza, comportamiento y color.
  * Extiende la clase Mascota e implementa la interfaz Loggable para registrar información.
  */
+// equals() heredado de Mascota, por eso marca el warning el SonarQube.
 public class Gato extends Mascota implements Loggable {
   private String color;
 
@@ -41,15 +42,17 @@ public class Gato extends Mascota implements Loggable {
 
   @Override
   public void mostrarFicha() {
-    log().info("Tipo: " + tipoMascota()
-        + ", Nombre: " + getNombre()
-        + ", Edad: " + getEdad()
-        + ", Raza: " + getRaza()
-        + ", Color: " + getColor()
-        + ", Comportamiento: " + getComportamiento()
-        + ", Tamaño: " + getTamanio()
-        + ", Peso: " + getPeso()
-        + ", ID: " + getid());
+    String ficha = "\n[GATO] --------------------\n"
+        + "Nombre: " + getNombre() + "\n"
+        + "Edad: " + getEdad() + " años\n"
+        + "Raza: " + getRaza() + "\n"
+        + "Color: " + getColor() + "\n"
+        + "Comportamiento: " + getComportamiento() + "\n"
+        + "Tamaño: " + getTamanio() + " cm\n"
+        + "Peso: " + getPeso() + " kg\n"
+        + "ID: " + getid() + "\n";
+    log().info(ficha);
   }
+
 
 }

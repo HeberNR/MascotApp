@@ -17,7 +17,7 @@ public class Perro extends Mascota implements Loggable {
    * @param comportamiento Comportamiento del perro.
    */
   public Perro(String nombre, int edad, String raza, Comportamiento comportamiento,
-               String tipo, int tamanio, int peso) {
+               int tamanio, int peso) {
     super(nombre, edad, raza, comportamiento, tamanio, peso);
   }
 
@@ -28,13 +28,15 @@ public class Perro extends Mascota implements Loggable {
 
   @Override
   public void mostrarFicha() {
-    log().info("Tipo: " + tipoMascota()
-        + ", Nombre: " + getNombre()
-        + ", Edad: " + getEdad()
-        + ", Raza: " + getRaza()
-        + ", Comportamiento: " + getComportamiento()
-        + ", Tamaño: " + getTamanio()
-        + ", Peso: " + getPeso()
-        + ", ID: " + getid());
+    String ficha = "\n[PERRO] ------------------\n"
+        + "Nombre: " + getNombre() + "\n"
+        + "Edad: " + getEdad() + " años\n"
+        + "Raza: " + getRaza() + "\n"
+        + "Comportamiento: " + getComportamiento() + "\n"
+        + "Tamaño: " + getTamanio() + " cm\n"
+        + "Peso: " + getPeso() + " kg\n"
+        + "ID: " + getid() + "\n";
+    log().info(ficha);
   }
+
 }

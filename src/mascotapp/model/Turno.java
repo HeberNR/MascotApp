@@ -1,10 +1,8 @@
 package mascotapp.model;
 
+import java.time.LocalDate;
 import mascotapp.model.servicios.Servicios;
 import mascotapp.util.Loggable;
-
-import java.nio.file.attribute.UserDefinedFileAttributeView;
-import java.time.LocalDate;
 
 /**
  * Clase Turno que representa una cita o turno en un sistema de gestión de mascotas.
@@ -33,7 +31,15 @@ public class Turno implements Loggable {
     this.servicio = servicio;
   }
 
-  // Constructor sobrecargado sin dueño
+  /**
+   * Constructor de la clase Turno sin dueño.
+   * Utiliza el mismo ID único generado por el otro constructor.
+   *
+   * @param fecha    Fecha del turno en formato "dd/MM/yyyy".
+   * @param mascota  Mascota asociada al turno.
+   * @param servicio Servicio asociado al turno.
+   */
+
   public Turno(LocalDate fecha, Mascota mascota, Servicios servicio) {
     this(fecha, mascota, null, servicio);
   }
@@ -65,25 +71,45 @@ public class Turno implements Loggable {
    * Registra un mensaje de confirmación en el log.
    */
   public void confirmarTurno() {
-    log().info("Turno confirmado: " + this);
-    log().info("Precio del servicio: $" + servicio.calcularPrecio());
+    log().info("=== Confirmación de Turno ===");
+    log().info("Detalles del turno:");
+    log().info(this.toString());
+    if (servicio != null) {
+      log().info(String.format("Precio del servicio: $%.2f", servicio.calcularPrecio()));
+    } else {
+      log().info("El servicio no está definido, no se puede calcular el precio.");
+    }
+    log().info("=============================");
   }
+
+
 
   /**
    * Metodo para mostrar detalles de la mascota.
    */
   public void mostrarDetalles() {
-    log().info("Detalles del Turno: " +
-        "Fecha: " + fecha +
-        ", Mascota: " + (mascota != null ? mascota.getNombre() : "No especificada") +
-        ", Dueño: " + (duenio != null ? duenio.getNombre() : "No especificado") +
-        ", Servicio: " + (servicio != null ? servicio.getClass().getSimpleName() : "No especificado"));
+    String detalles = "\n[DETALLE DEL TURNO] --------\n"
+        + "ID Turno: " + id + "\n"
+        + "Fecha: " + fecha + "\n"
+        + "Mascota: " + (mascota != null ? mascota.getNombre()
+        + " (" + mascota.tipoMascota() + ")" : "No especificada") + "\n"
+        + "Dueño: " + (duenio != null ? duenio.getNombre() : "No especificado") + "\n"
+        + "Servicio: " + (servicio != null ? servicio.getClass().getSimpleName() :
+        "No especificado")
+        + "\n"
+        + "----------------------------------";
+    log().info(detalles);
   }
+
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj) return true;
-    if (obj == null || getClass() != obj.getClass()) return false;
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null || getClass() != obj.getClass()) {
+      return false;
+    }
     Turno turno = (Turno) obj;
     return id.equals(turno.id);
   }
@@ -95,9 +121,9 @@ public class Turno implements Loggable {
 
   @Override
   public String toString() {
-    return "Turno {\n" +
-        "    id = '" + id + "',\n" +
-        "    fecha = '" + fecha + "'\n" +
-        "}";
+    return "Turno {\n"
+        + " id = '" + id + "',\n"
+        + " fecha = '" + fecha + "'\n"
+        + "}";
   }
 }
