@@ -1,4 +1,7 @@
-package model;
+package mascotapp.model.servicios;
+
+import mascotapp.enums.EstadoServicios;
+import mascotapp.util.Loggable;
 
 /**
  * Clase ComboCompleto que implementa la interfaz Servicios y Loggable.
@@ -9,6 +12,7 @@ public class ComboCompleto implements Servicios, Loggable {
   private Servicios banio;
   private Servicios cortePelo;
   private Servicios limpiezaOidos;
+  private EstadoServicios estados = EstadoServicios.PENDIENTE;
 
   /**
    * Constructor de la clase ComboCompleto.

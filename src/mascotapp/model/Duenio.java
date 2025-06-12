@@ -1,4 +1,7 @@
-package model;
+package mascotapp.model;
+
+import mascotapp.util.Loggable;
+
 
 /**
  * Clase Turno que representa un dueño de mascotas.
@@ -8,24 +11,24 @@ public class Duenio implements Loggable {
   private final int id;
   private String nombre;
   private String telefono;
-  private String direccion;
-  Mascota[] mascotas = new Mascota[4];
-  private static int contadorDuenios = 0;
+  Mascota[] mascotas;
+  static int contadorDuenios = 0;
+  private int cantidadMascotas = 0;
+
 
   /**
    * Constructor de la clase Duenio.
    *
-   * @param nombre    Nombre del dueño.
-   * @param telefono  Teléfono del dueño.
-   * @param direccion Dirección del dueño.
-   * @param mascotas  Array de mascotas del dueño, con un máximo de 4.
+   * @param nombre   Nombre del dueño.
+   * @param telefono Teléfono del dueño.
+   * @param mascotas Array de mascotas del dueño, con un máximo de 4.
    */
-  public Duenio(String nombre, String telefono, String direccion, Mascota[] mascotas) {
+  public Duenio(String nombre, String telefono) {
     this.id = contadorDuenios++;
     this.nombre = nombre;
     this.telefono = telefono;
-    this.direccion = direccion;
-    this.mascotas = mascotas;
+    this.mascotas = new Mascota[4];
+    this.cantidadMascotas = 0;
   }
 
   // setters
@@ -37,11 +40,6 @@ public class Duenio implements Loggable {
     this.telefono = telefono;
   }
 
-  public void setDireccion(String direccion) {
-    this.direccion = direccion;
-  }
-
-
   // getters
   public String getNombre() {
     return nombre;
@@ -49,10 +47,6 @@ public class Duenio implements Loggable {
 
   public String getTelefono() {
     return telefono;
-  }
-
-  public String getDireccion() {
-    return direccion;
   }
 
   public int getId() {
@@ -67,7 +61,6 @@ public class Duenio implements Loggable {
   public String toString() {
     return ("Duenio: " + nombre
         + " Telefono: " + telefono
-        + " Dirección: " + direccion
         + " ID: " + id);
   }
 
@@ -92,16 +85,13 @@ public class Duenio implements Loggable {
    * Método para agregar una mascota al dueño.
    * Si el dueño ya tiene 4 mascotas, no se puede agregar más.
    *
-   * @param mascotas Mascota a agregar al dueño.
+   * @param m Mascota a agregar al dueño.
    */
-  public void agregarMascota(Mascota mascotas) {
-    for (int i = 0; i < this.mascotas.length; i++) {
-      if (this.mascotas[i] == null) {
-        this.mascotas[i] = mascotas;
-        log().info("Mascota agregada: " + mascotas.getNombre());
-      } else {
-        log().info("No se puede agregar más mascotas, el límite es 4.");
-      }
+  public void agregarMascota(Mascota m) {
+    if (cantidadMascotas < mascotas.length) {
+      mascotas[cantidadMascotas++] = m;
+    } else {
+      log().info("Este dueño ya tiene el máximo de 4 mascotas.");
     }
   }
 
@@ -110,13 +100,17 @@ public class Duenio implements Loggable {
    * Recorre el array de mascotas y muestra la ficha de cada una.
    */
   public void mostrarMascotas() {
-    log().info("Mascotas del dueño:");
-    for (Mascota mascota : mascotas) {
-      if (mascota != null) {
-        mascota.mostrarFicha();
-      } else {
-        log().info("No hay mascota en esta posición.");
+    log().info("Mascotas de " + nombre + ":");
+    if (cantidadMascotas == 0) {
+      log().info("  - No tiene mascotas registradas.");
+    } else {
+      for (int i = 0; i < cantidadMascotas; i++) {
+        Mascota m = mascotas[i];
+        if (m != null) {
+          log().info("  - " + m.getNombre() + " (" + m.getClass().getSimpleName() + ")");
+        }
       }
     }
   }
 }
+

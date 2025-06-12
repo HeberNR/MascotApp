@@ -1,4 +1,5 @@
-package model;
+package mascotapp.util;
+
 
 import java.util.logging.Logger;
 

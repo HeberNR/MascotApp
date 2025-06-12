@@ -1,4 +1,7 @@
-package model;
+package mascotapp.model;
+
+import mascotapp.enums.Comportamiento;
+import mascotapp.util.Loggable;
 
 /**
  * Clase Gato que representa un gato como una mascota con un nombre,
@@ -17,9 +20,18 @@ public class Gato extends Mascota implements Loggable {
    * @param comportamiento Comportamiento del gato.
    * @param color          Color del gato.
    */
-  public Gato(String nombre, int edad, String raza, Comportamiento comportamiento, String color) {
-    super(nombre, edad, raza, comportamiento);
+  public Gato(String nombre, int edad, String raza, Comportamiento comportamiento,
+              String color, int tamanio, int peso) {
+    super(nombre, edad, raza, comportamiento, tamanio, peso);
     this.color = color;
+  }
+
+  public void setColor(String color) {
+    this.color = color;
+  }
+
+  public String getColor() {
+    return color;
   }
 
   @Override
@@ -33,7 +45,11 @@ public class Gato extends Mascota implements Loggable {
         + ", Nombre: " + getNombre()
         + ", Edad: " + getEdad()
         + ", Raza: " + getRaza()
-        + ", Color: " + color
+        + ", Color: " + getColor()
+        + ", Comportamiento: " + getComportamiento()
+        + ", Tamaño: " + getTamanio()
+        + ", Peso: " + getPeso()
         + ", ID: " + getid());
   }
+
 }

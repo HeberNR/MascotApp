@@ -1,4 +1,4 @@
-package model;
+package mascotapp.model.servicios;
 
 /**
  * Interfaz Servicios que define los métodos necesarios para aplicar un servicio.

@@ -1,4 +1,7 @@
-package model;
+package mascotapp.model;
+
+import mascotapp.enums.Comportamiento;
+import mascotapp.util.Loggable;
 
 /**
  * Representa una mascota (base para Perro y Gato) en el sistema MascotApp.
@@ -12,6 +15,9 @@ public abstract class Mascota implements Loggable {
   private Comportamiento comportamiento;
   private final String id;
   private static int contadorMascotas = 0;
+  private int tamanio;
+  private int peso;
+  private Duenio duenio;
 
   /**
    * Constructor de la clase Mascota.
@@ -21,12 +27,15 @@ public abstract class Mascota implements Loggable {
    * @param raza           Raza de la mascota.
    * @param comportamiento Comportamiento de la mascota.
    */
-  protected Mascota(String nombre, int edad, String raza, Comportamiento comportamiento) {
+  protected Mascota(String nombre, int edad, String raza, Comportamiento comportamiento,
+                    int tamanio, int peso) {
     this.id = "MASC-" + contadorMascotas++;
     this.comportamiento = comportamiento;
     this.raza = raza;
     this.edad = edad;
     this.nombre = nombre;
+    this.tamanio = tamanio;
+    this.peso = peso;
   }
 
   // setters
@@ -46,6 +55,19 @@ public abstract class Mascota implements Loggable {
     this.comportamiento = comportamiento;
   }
 
+  public void setTamanio(int tamanio) {
+    this.tamanio = tamanio;
+  }
+
+  public void setPeso(int peso) {
+    this.peso = peso;
+  }
+
+  public void setDuenio(Duenio duenio) {
+    this.duenio = duenio;
+  }
+
+
   // getters
   public String getNombre() {
     return nombre;
@@ -63,6 +85,10 @@ public abstract class Mascota implements Loggable {
     return comportamiento;
   }
 
+  public Duenio getDuenio() {
+    return duenio;
+  }
+
   /**
    * Obtiene el ID único de la mascota.
    *
@@ -70,6 +96,14 @@ public abstract class Mascota implements Loggable {
    */
   public String getid() {
     return id;
+  }
+
+  public int getTamanio() {
+    return tamanio;
+  }
+
+  public int getPeso() {
+    return peso;
   }
 
   @Override

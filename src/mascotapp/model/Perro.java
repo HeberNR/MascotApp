@@ -1,12 +1,13 @@
-package model;
+package mascotapp.model;
+
+import mascotapp.enums.Comportamiento;
+import mascotapp.util.Loggable;
 
 /**
  * Clase Perro que representa una mascota de tipo perro con un nombre, edad, raza y comportamiento.
  * Extiende la clase Mascota e implementa la interfaz Loggable para registrar información.
  */
 public class Perro extends Mascota implements Loggable {
-  Comportamiento comportamiento;
-
   /**
    * Constructor de la clase Perro.
    *
@@ -15,9 +16,9 @@ public class Perro extends Mascota implements Loggable {
    * @param raza           Raza del perro.
    * @param comportamiento Comportamiento del perro.
    */
-  public Perro(String nombre, int edad, String raza, Comportamiento comportamiento, String tipo) {
-    super(nombre, edad, raza, comportamiento);
-    this.comportamiento = comportamiento;
+  public Perro(String nombre, int edad, String raza, Comportamiento comportamiento,
+               String tipo, int tamanio, int peso) {
+    super(nombre, edad, raza, comportamiento, tamanio, peso);
   }
 
   @Override
@@ -31,6 +32,9 @@ public class Perro extends Mascota implements Loggable {
         + ", Nombre: " + getNombre()
         + ", Edad: " + getEdad()
         + ", Raza: " + getRaza()
+        + ", Comportamiento: " + getComportamiento()
+        + ", Tamaño: " + getTamanio()
+        + ", Peso: " + getPeso()
         + ", ID: " + getid());
   }
 }

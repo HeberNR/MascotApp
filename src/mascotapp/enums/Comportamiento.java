@@ -1,4 +1,4 @@
-package model;
+package mascotapp.enums;
 
 /**
  * Enum que define los diferentes comportamientos de un animal.
